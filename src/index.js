@@ -1,45 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { FaStar } from "react-icons/fa"
-
-const createArray = (length) => [
-  ...Array(length)
-];
-
-const Star = ( { selected = false, onSelect }) => {
-  return (
-    <FaStar 
-      color={ selected ? "red" : "gray" }
-      onClick={onSelect}/>
-  );
-}
-
-const StarRating = ({ totalStars = 5 }) => {
-  const [
-    selectedSars,
-    setSelectedSars
-  ] = useState(0);
-
-  return(  
-    <>
-      {createArray(totalStars).map((n, i) => (
-        <Star 
-          key={i}
-          selected={selectedSars > i}
-          onSelect={ () => setSelectedSars(i + 1)}
-          />
-      ))}
-      <p>
-        {selectedSars} of {totalStars}
-      </p>
-    </>
-  );
-}
 
 const App = () =>{
-  return(<StarRating totalStart={4} />);
+  const [name, setName] = useState("Jan");
+  return(
+    <section>
+      <p>Congratulations!</p>
+      <button onClick={() => setName("Will")}>{name}</button>
+    </section>
+  );
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
