@@ -8,18 +8,38 @@ const createArray = (length) => [
   ...Array(length)
 ];
 
-const Star = ( { selected = false }) => {
-  return <FaStar color={ selected ? "red" : "gray" }/>
+const Star = ( { selected = false, onSelect }) => {
+  return (
+    <FaStar 
+      color={ selected ? "red" : "gray" }
+      onClick={onSelect}/>
+  );
 }
 
-const StarRating = ({ totalStart = 5 }) => {
-  return createArray(totalStart).map((n, i) => (
-    <Star key={i}/>
-  ))
+const StarRating = ({ totalStars = 5 }) => {
+  const [
+    selectedSars,
+    setSelectedSars
+  ] = useState(0);
+
+  return(  
+    <>
+      {createArray(totalStars).map((n, i) => (
+        <Star 
+          key={i}
+          selected={selectedSars > i}
+          onSelect={ () => setSelectedSars(i + 1)}
+          />
+      ))}
+      <p>
+        {selectedSars} of {totalStars}
+      </p>
+    </>
+  );
 }
 
 const App = () =>{
-  return(<StarRating />);
+  return(<StarRating totalStart={4} />);
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
