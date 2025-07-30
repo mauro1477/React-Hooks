@@ -5,16 +5,21 @@ import reportWebVitals from './reportWebVitals';
 
 const App = () =>{
   const [name, setName] = useState("Jan");
-  console.log(name);
+  const [admin, setAdmin] = useState(false);
 
   useEffect(() => {
-    document.title = `Celebrate ${name}`;
-  },[]);
+    console.log(`Celebrate ${name}`);
+  },[name]);
+
+  useEffect(() => {
+    console.log(`The user is ${admin ? "admin" : "not admin"}`);
+  }, [admin]);
 
   return(
     <section>
-      <p>Congratulations! hello</p>
+      <p>Congratulations! {name}</p>
       <button onClick={() => setName("mark")}>{name}</button>
+      <button onClick={() => setAdmin(true)}>Login in</button>
     </section>
   );
 }
