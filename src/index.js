@@ -5,10 +5,16 @@ import reportWebVitals from './reportWebVitals';
 
 const App = () =>{
   const [name, setName] = useState("Jan");
+  console.log(name);
+
+  useEffect(() => {
+    document.title = `Celebrate ${name}`;
+  },[]);
+
   return(
     <section>
-      <p>Congratulations!</p>
-      <button onClick={() => setName("Will")}>{name}</button>
+      <p>Congratulations! hello</p>
+      <button onClick={() => setName("mark")}>{name}</button>
     </section>
   );
 }
