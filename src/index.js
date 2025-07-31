@@ -4,24 +4,27 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 const App = () =>{
-  const [name, setName] = useState("Jan");
-  const [admin, setAdmin] = useState(false);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    console.log(`Celebrate ${name}`);
-  },[name]);
+    fetch(`https://api.github.com/users`)
+    .then((response) => response.json())
+    .then(setData);
+      console.log(data);
+  },[]);
 
-  useEffect(() => {
-    console.log(`The user is ${admin ? "admin" : "not admin"}`);
-  }, [admin]);
+  if(data){
+    return (
+      <ul>
+        {data.map((user) => (
+          <li key={user.id}>{user.login}</li>
+        ))}
+      </ul>
+    );
+  }
+  console.log(data);
 
-  return(
-    <section>
-      <p>Congratulations! {name}</p>
-      <button onClick={() => setName("mark")}>{name}</button>
-      <button onClick={() => setAdmin(true)}>Login in</button>
-    </section>
-  );
+  return<p>No users</p>;
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
